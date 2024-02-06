@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.lifecycle.ViewModel
 import com.example.adminblinkitclone.Utils
 import com.example.adminblinkitclone.models.Product
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,6 +17,9 @@ class AdminViewModel:ViewModel() {
 
     private val _downloadedUrls = MutableStateFlow<ArrayList<String?>>(arrayListOf())
     var downloadedUrls:StateFlow<ArrayList<String?>> = _downloadedUrls
+
+    private val _isProductSaved = MutableStateFlow(false)
+    var isProductSaved:StateFlow<Boolean> = _isProductSaved
 
     fun saveImagesInDB(imageUri :ArrayList<Uri>){
         val downloadUrls = ArrayList<String?>()
@@ -34,8 +38,17 @@ class AdminViewModel:ViewModel() {
                 }
             }
         }
-        fun saveProduct(product: Product){
-            
-        }
+    }
+    fun saveProduct(product: Product){
+        FirebaseDatabase.getInstance().getReference("Admins").child("AllProducts/${product.productRandomId}").setValue(product)
+            .addOnSuccessListener {
+                FirebaseDatabase.getInstance().getReference("Admins").child("ProductCategory/${product.productCategory}").setValue(product)
+                    .addOnSuccessListener {
+                        FirebaseDatabase.getInstance().getReference("Admins").child("ProductType/${product.productType}").setValue(product)
+                            .addOnSuccessListener {
+                                _isProductSaved.value=true
+                            }
+                    }
+            }
     }
 }

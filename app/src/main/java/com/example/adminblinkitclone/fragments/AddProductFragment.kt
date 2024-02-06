@@ -1,5 +1,6 @@
 package com.example.adminblinkitclone.fragments
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -12,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.adminblinkitclone.AdminMainActivity
 import com.example.adminblinkitclone.Constants
 import com.example.adminblinkitclone.R
 import com.example.adminblinkitclone.Utils
@@ -19,6 +21,7 @@ import com.example.adminblinkitclone.adapters.AdapterSelectedImage
 import com.example.adminblinkitclone.databinding.FragmentAddProductBinding
 import com.example.adminblinkitclone.models.Product
 import com.example.adminblinkitclone.viewmodel.AdminViewModel
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -83,7 +86,8 @@ class AddProductFragment : Fragment() {
                     productStock = productStock.toInt(),
                     productType = productType,
                     itemCount = 0,
-                    adminUid = Utils.getCurrentUserId()
+                    adminUid = Utils.getCurrentUserId(),
+                    productRandomId = Utils.getRandomUser()
                 )
 
                 saveImage(product)
@@ -107,17 +111,28 @@ class AddProductFragment : Fragment() {
     }
 
     private fun getUrls(product: Product) {
+        Utils.showDialog(requireContext(),"Publishing Product...")
+
         lifecycleScope.launch {
-            viewModel.downloadedUrls.collect{
-             val urls = it
-                product.productImagesUris = urls
+            viewModel.downloadedUrls.collect{urls->
+                 val nonNullUrls=urls.filterNotNull()
+                product.productImagesUris=ArrayList(nonNullUrls)
                  saveProduct(product)
             }
         }
     }
 
     private fun saveProduct(product: Product) {
-
+        viewModel.saveProduct(product)
+        lifecycleScope.launch {
+            viewModel.isProductSaved.collect{
+                if (it){
+                   Utils.hideDialog()
+                    startActivity(Intent(requireActivity(),AdminMainActivity::class.java))
+                    Utils.showToast(requireContext(),"Your product is live")
+                }
+            }
+        }
     }
 
     private fun onImageSelectClicked(){
@@ -133,7 +148,7 @@ class AddProductFragment : Fragment() {
 
         binding.apply {
             etProductUnit.setAdapter(units)
-            etProductCategory.setAdapter(productType)
+            etProductCategory.setAdapter(category)
             etProductType.setAdapter(productType)
         }
     }

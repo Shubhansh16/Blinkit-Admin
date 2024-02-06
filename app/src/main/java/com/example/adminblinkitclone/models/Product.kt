@@ -3,7 +3,7 @@ package com.example.adminblinkitclone.models
 import java.util.UUID
 
 data class Product(
-    var productRandomId:String =UUID.randomUUID().toString(),
+    var productRandomId:String? = null,
     var productTitle:String? = null,
     var productQuantity: Int? = null,
     var productType:String? = null,
