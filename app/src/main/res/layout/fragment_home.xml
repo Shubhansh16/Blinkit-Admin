@@ -6,6 +6,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.HomeFragment">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvText"
+        android:visibility="gone"
+        android:text="No Products added in this category"
+        app:layout_constraintTop_toBottomOf="@id/rvCategories"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="@dimen/_12ssp"
+        android:textColor="@color/yellow"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,6 +51,7 @@
             android:id="@+id/searchEt"
             android:background="@android:color/transparent"
             android:drawableStart="@drawable/baseline_search_24"
+            android:drawableTint="@color/black"
             android:drawablePadding="10dp"
             android:hint="Search"
             android:padding="10dp"
