@@ -8,12 +8,6 @@
     android:orientation="vertical"
     tools:context=".fragments.AddProductFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/yellow"
-        app:titleTextColor="#FFFFFF"
-        app:title="Add Product" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,7 +15,7 @@
         android:id="@+id/tvTxt"
         android:layout_gravity="center"
         android:layout_marginTop="13.00dp"
-        android:text="Please fill the product details!"
+        android:text="Edit Product"
         android:textColor="@color/yellow"
         android:textSize="18.20sp"
         android:textStyle="bold"/>
@@ -42,6 +36,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginHorizontal="26.00dp"
                 android:layout_marginTop="1.30dp"
+                android:enabled="false"
                 app:boxCornerRadiusTopStart="16.90dp"
                 app:boxCornerRadiusTopEnd="16.90dp"
                 app:boxCornerRadiusBottomStart="16.90dp"
@@ -74,6 +69,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_marginEnd="2.60dp"
                     android:layout_weight="0.5"
+                    android:enabled="false"
                     app:boxCornerRadiusTopStart="16.90dp"
                     app:boxCornerRadiusTopEnd="16.90dp"
                     app:boxCornerRadiusBottomStart="16.90dp"
@@ -82,13 +78,13 @@
                     app:endIconMode="clear_text"
                     app:hintTextColor="@color/yellow">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/etProductQuantity"
-                    android:drawablePadding="9.10dp"
-                    android:hint="Quantity(1kg, 1ltr)"
-                    android:inputType="number"/>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/etProductQuantity"
+                        android:drawablePadding="9.10dp"
+                        android:hint="Quantity(1kg, 1ltr)"
+                        android:inputType="number"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,6 +94,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_marginStart="2.60dp"
                     android:layout_marginEnd="2.60dp"
+                    android:enabled="false"
                     app:boxCornerRadiusTopStart="16.90dp"
                     android:layout_weight="0.5"
                     app:boxCornerRadiusTopEnd="16.90dp"
@@ -115,7 +112,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
-            
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -130,6 +127,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_marginEnd="2.60dp"
                     android:layout_weight="0.5"
+                    android:enabled="false"
                     app:boxCornerRadiusBottomEnd="16.90dp"
                     app:boxCornerRadiusBottomStart="16.90dp"
                     app:boxCornerRadiusTopEnd="16.90dp"
@@ -158,6 +156,7 @@
                     app:boxCornerRadiusTopEnd="16.90dp"
                     app:boxCornerRadiusTopStart="16.90dp"
                     app:cursorColor="@color/yellow"
+                    android:enabled="false"
                     app:endIconMode="clear_text"
                     app:hintTextColor="@color/yellow">
 
@@ -180,6 +179,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_marginHorizontal="26.00dp"
                 app:boxCornerRadiusTopStart="16.90dp"
+                android:enabled="false"
                 app:boxCornerRadiusTopEnd="16.90dp"
                 app:boxCornerRadiusBottomStart="16.90dp"
                 app:boxCornerRadiusBottomEnd="16.90dp"
@@ -206,6 +206,7 @@
                 app:boxCornerRadiusTopEnd="16.90dp"
                 app:boxCornerRadiusBottomStart="16.90dp"
                 app:boxCornerRadiusBottomEnd="16.90dp"
+                android:enabled="false"
                 app:cursorColor="@color/yellow"
                 app:startIconDrawable="@drawable/ic_baseline_category_24"
                 app:startIconTint="@color/black"
@@ -224,53 +225,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:weightSum="1"
+                android:layout_marginTop="13.00dp"
+                android:layout_marginHorizontal="26.00dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvPic"
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="match_parent"
+                    android:layout_height="58.50dp"
                     android:layout_gravity="center"
-                    android:layout_margin="3.90dp"
-                    android:layout_marginTop="13.00dp"
-                    android:text="Please select some images!"
-                    android:textColor="@color/yellow"
-                    android:textSize="18.20sp"
-                    android:textStyle="bold"/>
-                
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/btnSelectImage"
+                    android:id="@+id/btnEdit"
+                    android:layout_weight="0.5"
+                    android:layout_marginTop="6.50dp"
+                    android:backgroundTint="@color/yellow"
+                    android:text="Edit"
+                    android:layout_marginEnd="6.50dp"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    app:cornerRadius="10.40dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="match_parent"
+                    android:layout_height="58.50dp"
                     android:layout_gravity="center"
-                    android:backgroundTint="@color/black"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/baseline_add_photo_alternate_24"/>
+                    android:id="@+id/btnSave"
+                    android:layout_weight="0.5"
+                    android:layout_marginTop="6.50dp"
+                    android:backgroundTint="@color/yellow"
+                    android:text="Save"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    app:cornerRadius="10.40dp"/>
+
 
             </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:id="@+id/rvProductImages"
-                android:layout_marginHorizontal="16.90dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:orientation="horizontal"
-                tools:listitem="@layout/item_view_image_selection"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="match_parent"
-                android:layout_height="58.50dp"
-                android:layout_gravity="center"
-                android:id="@+id/btnAddProduct"
-                android:layout_margin="13.00dp"
-                android:layout_marginHorizontal="26.00dp"
-                android:layout_marginTop="6.50dp"
-                android:backgroundTint="@color/yellow"
-                android:text="Add Product"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                app:cornerRadius="10.40dp"/>
 
         </LinearLayout>
 

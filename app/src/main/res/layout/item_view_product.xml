@@ -41,6 +41,8 @@
                 android:id="@+id/tvProductTitle"
                 android:maxLines="1"
                 android:ellipsize="end"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold"
                 android:text="Amul Toned Fresh Milk alda a;oie aoie alie aoie a;oina a;oief "/>
 
             <TextView
